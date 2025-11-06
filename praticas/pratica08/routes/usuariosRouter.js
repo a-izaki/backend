@@ -1,21 +1,36 @@
 const express = require('express');
 const {gerarToken, verificarToken} = require('../middlewares/authMiddleware');
-const { token } = require('morgan');
 
 const router = express.Router();
 
+// POST /usuarios/login
 router.post('/login', (req, res) => {
-    const { usuario, email, senha } = req.body;
-    const emailUsuario = usuario || email; 
-    const token = gerarToken(emailUsuario);
-    return res.status(200).json({ token });
+    try {
+        // Gera o token passando o email do corpo da requisição
+        console.log('Body recebido:', req.body);
+        const token = gerarToken({ email: req.body.email });
+
+        // Retorna status 200 e o token gerado
+        return res.status(200).json({ token });              
+        
+    }   catch(err){
+        console.log('Erro no login:', err.message);
+        return res.status(500).json({ msg: err.message });
+    };
+    
   });
   
-  
-  router.post('/renovar', verificarToken, (req, res) => {
-    const novoToken = gerarToken(req.usuario.email);
+// POST /usuarios/renovar
+router.post('/renovar', verificarToken, (req, res) => {
+try {
+    // Gera o token passando o email do corpo da requisição
+    const novoToken = gerarToken({ email: req.body.email });
+
+    // Retorna status 200 e o token gerado
     return res.status(200).json({ token: novoToken });
-  });
-  
-  
+}   catch (err) {
+    return res.status(500).json({ msg: err.message });
+}    
+});
+
   module.exports = router;

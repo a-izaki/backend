@@ -1,0 +1,130 @@
+openapi: 3.1.1
+info:
+  title: Minha API
+  description: Projeto API REST usando expressJS e Mongoose
+  version: 0.1.0
+servers:
+  - url: http://localhost:3000/
+  - description: Ambiente de desenvolvimento  
+tags:
+  - tarefas
+paths:
+  /tarefas:
+    get:
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+        500:
+          content:
+            
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+        422:
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          content:
+  /tarefas/id:
+    get:
+      parameters:
+        - in: path
+          name: tarefaID
+          schema:
+            type: string
+          require: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          content:
+            application/json:
+              schema:
+                type: object
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          content:
+    put:
+      parameters:        
+      - in: path
+        name: tarefaID
+        schema:
+          type: string
+        require: true
+      requestBody:
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          content:
+            application/json:
+              schema:
+                type: object
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+        422:
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          content:
+    delete:
+      parameters:
+        parameters:        
+        - in: path
+          name: tarefaID
+          schema:
+            type: string
+          require: true
+      responses:
+        204:
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          content:
+            application/json:
+              schema:
+                type: object
+        404:
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          content:
+components:
