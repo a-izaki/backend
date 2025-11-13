@@ -1,36 +1,29 @@
 openapi: 3.0.0
-
 info:
-  title: API de Produtos
-  description: API para gerenciamento de produtos
+  title: Minha API Pratica09
+  description: Projeto API REST usando expressJS e Mongoose - pratica09
   version: 1.0.0
-
 servers:
-  - url: http://localhost:3000
-    description: Ambiente de desenvolvimento
-
+  - url: http://localhost:3000/
+  - description: Ambiente de desenvolvimento
 tags:
-  - name: produtos
-    description: Operações relacionadas a produtos
-
+  - tarefas
 paths:
   /produtos:
     get:
-      tags:
+      tag:
         - produtos
-      summary: Retorna a lista de produtos
       responses:
-        '200':
+        200:
           description: Uma lista de produtos
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ArrayOfProdutos'
-
-    post:
+                $ref: '#/components/schemas/ArrayOfProdutos'                
+    post:      
       tags:
         - produtos
-      summary: Cria um novo produto
+      summary: Uma lista de produtos
       requestBody:
         description: Um JSON com dados do novo produto
         required: true
@@ -47,8 +40,7 @@ paths:
                 $ref: '#/components/schemas/Produto'
         '422':
           description: Nome e preço são obrigatórios
-
-  /produtos/{produtoId}:
+  /produtos/id:
     get:
       tags:
         - produtos
@@ -69,7 +61,6 @@ paths:
                 $ref: '#/components/schemas/Produto'
         '404':
           description: Produto não encontrado
-
     put:
       tags:
         - produtos
@@ -116,14 +107,12 @@ paths:
           description: Produto removido com sucesso
         '404':
           description: Produto não encontrado
-
 components:
   schemas:
     ArrayOfProdutos:
       type: array
       items:
         $ref: '#/components/schemas/Produto'
-
     Produto:
       type: object
       properties:
